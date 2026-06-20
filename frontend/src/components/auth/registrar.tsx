@@ -16,14 +16,6 @@ export default function Registrar() {
                     />
                 </div>
                 <div className="w-full">
-                    <label className="block text-sm font-medium text-zinc-300 mb-1">Tipo de Usuário</label>
-                    <select className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all">
-                        <option value="">Selecione</option>
-                        <option value="pf">Paciente</option>
-                        <option value="pj">Medico</option>
-                    </select>
-                </div>
-                <div className="w-full">
                     <label className="block text-sm font-medium text-zinc-300 mb-1">E-mail</label>
                     <input 
                         type="email" 

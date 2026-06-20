@@ -29,7 +29,7 @@ export default function Login() {
                 
                 <button 
                     type="submit" 
-                    className="w-full py-3 px-4 bg-[#D4AF37] hover:bg-[#c4a132] text-black font-semibold rounded-lg transition-colors duration-200 mt-4"
+                    className="w-full py-3 px-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black font-semibold rounded-lg transition-all duration-200 mt-4"
                 >
                     Entrar no Sistema
                 </button>

@@ -28,7 +28,7 @@ export default function AuthPage() {
                 </div>
             </div>
 
-            <div className="hidden md:flex md:w-[50%] lg:w-[60%] flex-col justify-center p-12 lg:p-24 relative overflow-hidden bg-zinc-950 transition-all duration-300">
+            <div className="flex md:w-[50%] lg:w-[60%] flex-col justify-center p-12 lg:p-24 relative overflow-hidden bg-zinc-950 transition-all duration-300">
                 
                 <div className="absolute top-0 right-0 w-100 h-100 bg-[#D4AF37] opacity-[0.03] rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 w-125 h-125 bg-[#D4AF37] opacity-[0.02] rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
