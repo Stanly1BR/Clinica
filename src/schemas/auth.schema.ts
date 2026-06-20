@@ -10,3 +10,11 @@ export const authSchema = z.object({
 });
 
 export type AuthDTO = z.infer<typeof authSchema>;
+export type LoginDTO = Pick<AuthDTO, 'email' | 'password'>;
+export type RegisterDTO = Omit<AuthDTO, 'id' | 'createdAt' | 'updatedAt'>;
+
+export const AuthResponseSchema = z.object({
+    id: z.uuid(),
+});
+
+export type AuthResponseDTO = z.infer<typeof AuthResponseSchema>;
