@@ -5,20 +5,16 @@ import PacienteForm from "./PacienteForm";
 import MedicoForm from "./MedicoForm";
 
 export default function ConfigurarPerfil() {
-    // Gerencia o estado da seleção. Começa nulo (mostra a tela de escolha)
     const [tipoConta, setTipoConta] = useState<'paciente' | 'medico' | null>(null);
 
-    // Se o usuário já escolheu "paciente", renderiza o form de paciente
     if (tipoConta === 'paciente') {
         return <PacienteForm onBack={() => setTipoConta(null)} />;
     }
 
-    // Se o usuário já escolheu "medico", renderiza o form de médico
     if (tipoConta === 'medico') {
         return <MedicoForm onBack={() => setTipoConta(null)} />;
     }
 
-    // Tela de Seleção (View padrão)
     return (
         <div className="w-[100%] max-w-2xl mx-auto space-y-8 animate-in fade-in zoom-in-95 duration-300">
             <div className="text-center">
@@ -27,13 +23,12 @@ export default function ConfigurarPerfil() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                {/* Card de Paciente */}
+
                 <button 
                     onClick={() => setTipoConta('paciente')}
                     className="flex flex-col items-center justify-center p-8 bg-zinc-900/40 border border-zinc-800 rounded-xl hover:border-[#D4AF37] hover:bg-zinc-900/80 transition-all duration-300 group text-left w-[100%]"
                 >
                     <div className="w-16 h-16 rounded-full bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-4 group-hover:border-[#D4AF37] transition-colors">
-                        {/* Ícone simples em SVG para representar o paciente */}
                         <svg className="w-8 h-8 text-zinc-400 group-hover:text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
@@ -42,13 +37,11 @@ export default function ConfigurarPerfil() {
                     <p className="text-sm text-zinc-500 text-center">Quero agendar consultas e acompanhar meu histórico médico.</p>
                 </button>
 
-                {/* Card de Médico */}
                 <button 
                     onClick={() => setTipoConta('medico')}
                     className="flex flex-col items-center justify-center p-8 bg-zinc-900/40 border border-zinc-800 rounded-xl hover:border-[#D4AF37] hover:bg-zinc-900/80 transition-all duration-300 group text-left w-[100%]"
                 >
                     <div className="w-16 h-16 rounded-full bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-4 group-hover:border-[#D4AF37] transition-colors">
-                        {/* Ícone simples em SVG para representar o médico */}
                         <svg className="w-8 h-8 text-zinc-400 group-hover:text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                         </svg>

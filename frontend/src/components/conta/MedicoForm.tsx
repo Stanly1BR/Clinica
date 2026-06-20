@@ -11,7 +11,7 @@ export default function MedicoForm({ onBack }: { onBack: () => void }) {
                     <label className="block text-sm font-medium text-zinc-300 mb-1">CRM</label>
                     <input 
                         type="text" 
-                        maxLength={10} // Refletindo o z.string().length(10)
+                        maxLength={10}
                         placeholder="123456-UF"
                         className="w-[100%] px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all uppercase"
                     />
@@ -21,7 +21,7 @@ export default function MedicoForm({ onBack }: { onBack: () => void }) {
                     <label className="block text-sm font-medium text-zinc-300 mb-1">Especialidade Principal</label>
                     <input 
                         type="text" 
-                        maxLength={100} // Refletindo o z.string().max(100)
+                        maxLength={100}
                         placeholder="Ex: Cardiologia, Pediatria..."
                         className="w-[100%] px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all"
                     />

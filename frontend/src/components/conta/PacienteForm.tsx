@@ -11,7 +11,7 @@ export default function PacienteForm({ onBack }: { onBack: () => void }) {
                     <label className="block text-sm font-medium text-zinc-300 mb-1">CPF (Apenas números)</label>
                     <input 
                         type="text" 
-                        maxLength={11} // Refletindo o z.string().length(11)
+                        maxLength={11}
                         placeholder="00000000000"
                         className="w-[100%] px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all"
                     />
@@ -19,7 +19,6 @@ export default function PacienteForm({ onBack }: { onBack: () => void }) {
                 
                 <div className="w-[100%]">
                     <label className="block text-sm font-medium text-zinc-300 mb-1">Data de Nascimento</label>
-                    {/* O input type date reflete o z.date() */}
                     <input 
                         type="date" 
                         className="w-[100%] px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all [color-scheme:dark]"
@@ -30,7 +29,7 @@ export default function PacienteForm({ onBack }: { onBack: () => void }) {
                     <label className="block text-sm font-medium text-zinc-300 mb-1">Telefone (Com DDD)</label>
                     <input 
                         type="text" 
-                        maxLength={11} // Refletindo o z.string().length(11)
+                        maxLength={11}
                         placeholder="11999999999"
                         className="w-[100%] px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all"
                     />
