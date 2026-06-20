@@ -1,0 +1,52 @@
+export default function Registrar() {
+    return (
+        <div className="w-full space-y-8 animate-in fade-in zoom-in-95 duration-300">
+            <div className="text-center">
+                <h2 className="text-3xl font-bold text-white tracking-tight">Criar Conta</h2>
+                <p className="text-zinc-400 mt-2 text-sm">Cadastre-se para começar a sua jornada conosco</p>
+            </div>
+
+            <form className="space-y-5 w-full" onSubmit={(e) => e.preventDefault()}>
+                <div className="w-full">
+                    <label className="block text-sm font-medium text-zinc-300 mb-1">Nome Completo</label>
+                    <input 
+                        type="text" 
+                        placeholder="Seu Nome"
+                        className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all"
+                    />
+                </div>
+                <div className="w-full">
+                    <label className="block text-sm font-medium text-zinc-300 mb-1">Tipo de Usuário</label>
+                    <select className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all">
+                        <option value="">Selecione</option>
+                        <option value="pf">Paciente</option>
+                        <option value="pj">Medico</option>
+                    </select>
+                </div>
+                <div className="w-full">
+                    <label className="block text-sm font-medium text-zinc-300 mb-1">E-mail</label>
+                    <input 
+                        type="email" 
+                        placeholder="seu@email.com"
+                        className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all"
+                    />
+                </div>
+                <div className="w-full">
+                    <label className="block text-sm font-medium text-zinc-300 mb-1">Senha</label>
+                    <input 
+                        type="password" 
+                        placeholder="••••••••"
+                        className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all"
+                    />
+                </div>
+                
+                <button 
+                    type="submit" 
+                    className="w-full py-3 px-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black font-semibold rounded-lg transition-all duration-200 mt-4"
+                >
+                    Finalizar Cadastro
+                </button>
+            </form>
+        </div>
+    );
+}
