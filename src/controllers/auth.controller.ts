@@ -1,15 +1,23 @@
-import express from 'express';
-import type { AuthDTO, LoginDTO, RegisterDTO, AuthResponseDTO } from '../schemas/auth.schema.js';
+import { Router, type Request, type Response } from 'express';
+import type { LoginDTO, RegisterDTO, AuthResponseDTO } from '../schemas/auth.schema.js';
 import { AuthService } from '../services/auth.service.js';
 
 export class AuthController {
+    public router: Router;
     private authService: AuthService;
 
     constructor() {
+        this.router = Router();
         this.authService = new AuthService();
+        this.initializeRoutes();
     }
 
-    async login(req: express.Request, res: express.Response): Promise<void> {
+    private initializeRoutes() {
+        this.router.post('/login', this.login.bind(this));
+        this.router.post('/register', this.register.bind(this));
+    }
+
+    private async login(req: Request, res: Response): Promise<void> {
         try {
             const authData: LoginDTO = req.body;
             const response: AuthResponseDTO = await this.authService.Login(authData);
@@ -19,7 +27,7 @@ export class AuthController {
         }
     }
 
-    async register(req: express.Request, res: express.Response): Promise<void> {
+    private async register(req: Request, res: Response): Promise<void> {
         try {
             const authData: RegisterDTO = req.body;
             const response: AuthResponseDTO = await this.authService.Register(authData);
