@@ -1,6 +1,6 @@
 import type { MedicoDTO } from '../schemas/medico.schema';
 
-const API_URL = 'http://localhost:3000/api/medicos';
+const API_URL = 'http://localhost:3001/api/medicos';
 
 export class MedicoService {
     static async getById(id: string): Promise<MedicoDTO> {

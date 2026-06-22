@@ -4,6 +4,7 @@ import type { AuthDTO } from '../schemas/auth.schema.js';
 
 class Auth extends Model<AuthDTO> implements AuthDTO {
     public declare id: string;
+    public declare nome: string;
     public declare email: string;
     public declare password: string;
     public declare tipo: 'medico' | 'paciente';
@@ -17,6 +18,10 @@ Auth.init(
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
+        },
+        nome: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         email: {
             type: DataTypes.STRING,

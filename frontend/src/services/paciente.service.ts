@@ -1,6 +1,6 @@
 import type { PacienteDTO } from '../schemas/paciente.schema';
 
-const API_URL = 'http://localhost:3000/api/pacientes';
+const API_URL = 'http://localhost:3001/api/pacientes';
 
 export class PacienteService {
     static async getById(id: string): Promise<PacienteDTO> {
@@ -63,7 +63,6 @@ export class PacienteService {
         if (!response.ok) {
             throw new Error('Failed to delete paciente');
         }
-
-        return response.json();
+        // Removido o return response.json() pois a exclusão retorna 204 No Content
     }
 }

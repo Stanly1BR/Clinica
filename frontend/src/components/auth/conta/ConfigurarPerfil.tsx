@@ -3,27 +3,31 @@
 import { useState } from "react";
 import PacienteForm from "./PacienteForm";
 import MedicoForm from "./MedicoForm";
+import type { RegisterDTO } from "@/schemas/auth.schema";
 
-export default function ConfigurarPerfil() {
+interface ConfigurarPerfilProps {
+    authData: Omit<RegisterDTO, 'tipo'>;
+}
+
+export default function ConfigurarPerfil({ authData }: ConfigurarPerfilProps) {
     const [tipoConta, setTipoConta] = useState<'paciente' | 'medico' | null>(null);
 
     if (tipoConta === 'paciente') {
-        return <PacienteForm onBack={() => setTipoConta(null)} />;
+        return <PacienteForm authData={authData} onBack={() => setTipoConta(null)} />;
     }
 
     if (tipoConta === 'medico') {
-        return <MedicoForm onBack={() => setTipoConta(null)} />;
+        return <MedicoForm authData={authData} onBack={() => setTipoConta(null)} />;
     }
 
     return (
         <div className="w-[100%] max-w-2xl mx-auto space-y-8 animate-in fade-in zoom-in-95 duration-300">
             <div className="text-center">
                 <h2 className="text-3xl font-bold text-white tracking-tight">Finalize seu cadastro</h2>
-                <p className="text-zinc-400 mt-2 text-sm">Como você deseja utilizar nossa plataforma?</p>
+                <p className="text-zinc-400 mt-2 text-sm">Olá, {authData.nome.split(' ')[0]}! Como você deseja utilizar nossa plataforma?</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-
                 <button 
                     onClick={() => setTipoConta('paciente')}
                     className="flex flex-col items-center justify-center p-8 bg-zinc-900/40 border border-zinc-800 rounded-xl hover:border-[#D4AF37] hover:bg-zinc-900/80 transition-all duration-300 group text-left w-[100%]"

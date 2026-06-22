@@ -1,6 +1,6 @@
-import type {LoginDTO, RegisterDTO, AuthResponseDTO} from '../schemas/auth.schema';
+import type { LoginDTO, RegisterDTO, AuthResponseDTO } from '../schemas/auth.schema';
 
-const API_URL = 'http://localhost:3000/api/auth';
+const API_URL = 'http://localhost:3001/api/auth';
 
 export class AuthService {
     static async login(data: LoginDTO): Promise<AuthResponseDTO> {
