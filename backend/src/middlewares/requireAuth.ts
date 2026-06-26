@@ -1,37 +1,33 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-// Estendendo a interface do Express para aceitar nossos campos customizados
-declare global {
-  namespace Express {
-    interface Request {
-      usuarioId?: string;
-      tipoConta?: string;
-    }
-  }
-}
+const JWT_SECRET = process.env.JWT_SECRET;
 
-const JWT_SECRET = process.env.JWT_SECRET || 'chave-secreta-padrao-docsync-2026';
+if (!JWT_SECRET) {
+    throw new Error("Variável JWT_SECRET não configurada no .env!");
+}
 
 export const requireAuth = (req: Request, res: Response, next: NextFunction): void => {
     // Busca o token no formato "Bearer <token>"
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        res.status(401).json({ error: "Acesso negado: Token não fornecido ou em formato incorreto." });
+        res.status(401).json({ error: "Acesso negado: Header de autenticação ausente ou incorreto." });
         return;
     }
 
     // Extrai apenas a string do token
     const token = authHeader.split(' ')[1];
 
+    // O AJUSTE: Garante que o token realmente existe após o "Bearer "
+    if (!token) {
+        res.status(401).json({ error: "Acesso negado: Token não fornecido." });
+        return;
+    }
+
     try {
-        // Valida o token e decodifica os dados, usando unknown para contornar a limitação de tipos do TS
-        const decoded = jwt.verify(token, JWT_SECRET) as unknown as { userId: string, tipo: string };
-        
-        // Injeta os dados na requisição para que os controllers possam usar (ex: req.usuarioId)
-        req.usuarioId = decoded.userId;
-        req.tipoConta = decoded.tipo;
+        // Agora o TypeScript tem 100% de certeza que 'token' e 'JWT_SECRET' são strings
+        jwt.verify(token, JWT_SECRET);
         
         next();
     } catch (error) {

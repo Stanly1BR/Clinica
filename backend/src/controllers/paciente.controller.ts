@@ -1,6 +1,7 @@
 import { Router, type Request, type Response } from 'express';
-import type { PacienteDTO } from '../schemas/paciente.schema.js';
+import { pacienteSchema, type PacienteDTO } from '../schemas/paciente.schema.js';
 import { PacienteService } from '../services/paciente.service.js';
+import { validate } from '../middlewares/validate.js';
 
 export class PacienteController {
     public router: Router;
@@ -15,8 +16,8 @@ export class PacienteController {
     private initializeRoutes() {
         this.router.get('/', this.getAllPacientes.bind(this));
         this.router.get('/:id', this.getPacienteById.bind(this));
-        this.router.post('/', this.createPaciente.bind(this));
-        this.router.put('/:id', this.updatePaciente.bind(this));
+        this.router.post('/', validate(pacienteSchema), this.createPaciente.bind(this));
+        this.router.put('/:id', validate(pacienteSchema.partial()), this.updatePaciente.bind(this));
         this.router.delete('/:id', this.deletePaciente.bind(this));
     }
 
@@ -24,8 +25,8 @@ export class PacienteController {
         try {
             const { id } = req.params;
             
-            if (id !== typeof String) {
-                res.status(400).json({ error: 'Invalid ID format' });
+            if (!id) {
+                res.status(400).json({ error: 'ID is required' });
                 return;
             }
 
@@ -64,8 +65,8 @@ export class PacienteController {
         try {
             const { id } = req.params;
 
-            if (id !== typeof String) {
-                res.status(400).json({ error: 'Invalid ID format' });
+            if (!id) {
+                res.status(400).json({ error: 'ID is required' });
                 return;
             }
 
@@ -87,8 +88,8 @@ export class PacienteController {
         try {
             const { id } = req.params;
 
-            if (id !== typeof String) {
-                res.status(400).json({ error: 'Invalid ID format' });
+            if (!id) {
+                res.status(400).json({ error: 'ID is required' });
                 return;
             }
 

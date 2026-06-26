@@ -22,6 +22,7 @@ export const useAuth = () => {
         onSuccess: (data: AuthResponseDTO) => {
             AuthSession.set(data);
             queryClient.setQueryData(['user'], data);
+            router.push('/auth');
         },
     });
 
@@ -46,8 +47,6 @@ export const useAuth = () => {
         login: loginMutation.mutate,
         register: registerMutation.mutate,
         registerAsync: registerMutation.mutateAsync, // Adicionado para uso com await
-        logout,
-        isLoggingIn: loginMutation.isPending || loginMutation.isLoading,
-        isRegistering: registerMutation.isPending || registerMutation.isLoading,
+        logout
     };
 }

@@ -1,30 +1,30 @@
-import type { PacienteDTO } from '../schemas/paciente.schema';
+import { ConsultaDTO } from "@/schemas/consulta.schema";
 import { fetchWithAuth } from '../utils/fetchWithAuth';
 
-const API_URL = 'http://localhost:3001/api/pacientes';
+const API_URL = 'http://localhost:3001/api/consultas';
 
-export class PacienteService {
-    static async getById(id: string): Promise<PacienteDTO> {
+export class ConsultaService {
+    static async getById(id: string): Promise<ConsultaDTO> {
         const response = await fetchWithAuth(`${API_URL}/${id}`);
 
         if (!response.ok) {
-            throw new Error('Failed to fetch paciente');
+            throw new Error('Failed to fetch consulta');
         }
 
         return response.json();
     }
 
-    static async getAll(): Promise<PacienteDTO[]> {
+    static async getAll(): Promise<ConsultaDTO[]> {
         const response = await fetchWithAuth(API_URL);
 
         if (!response.ok) {
-            throw new Error('Failed to fetch pacientes');
+            throw new Error('Failed to fetch consultas');
         }
 
         return response.json();
     }
 
-    static async create(data: Omit<PacienteDTO, 'id' | 'createdAt' | 'updatedAt'>): Promise<PacienteDTO> {
+    static async create(data: Omit<ConsultaDTO, 'id' | 'createdAt' | 'updatedAt'>): Promise<ConsultaDTO> {
         const response = await fetchWithAuth(API_URL, {
             method: 'POST',
             headers: {
@@ -34,13 +34,13 @@ export class PacienteService {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to create paciente');
+            throw new Error('Failed to create consulta');
         }
 
         return response.json();
     }
 
-    static async update(id: string, data: Partial<Omit<PacienteDTO, 'id' | 'createdAt' | 'updatedAt'>>): Promise<PacienteDTO> {
+    static async update(id: string, data: Partial<Omit<ConsultaDTO, 'id' | 'createdAt' | 'updatedAt'>>): Promise<ConsultaDTO> {
         const response = await fetchWithAuth(`${API_URL}/${id}`, {
             method: 'PUT',
             headers: {
@@ -50,7 +50,7 @@ export class PacienteService {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to update paciente');
+            throw new Error('Failed to update consulta');
         }
 
         return response.json();
@@ -62,7 +62,7 @@ export class PacienteService {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to delete paciente');
+            throw new Error('Failed to delete consulta');
         }
     }
 }

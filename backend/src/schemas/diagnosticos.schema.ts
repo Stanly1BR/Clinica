@@ -6,7 +6,7 @@ export const diagnosticosSchema = z.object({
     cid: z.string().min(1, 'O CID é obrigatório'),
     pacienteId: z.uuid(),
     consultaId: z.uuid(),
-    dataDiagnostico: z.date(),
+    dataDiagnostico: z.coerce.date(),
 });
 
 export type DiagnosticoDTO = z.infer<typeof diagnosticosSchema>;

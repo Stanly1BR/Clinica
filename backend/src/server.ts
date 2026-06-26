@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import router from './controllers/index.controller.js';
 import { sequelize } from './models/index.js';
 
-dotenv.config();
+dotenv.config({ path: '.env' });
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use('/api', router);
 
-sequelize.sync({ alter: true }) // Sincroniza o modelo com o banco de dados, alterando as tabelas conforme necessário
+sequelize.sync()
   .then(() => {
     console.log('Database connected and synced successfully.');
 

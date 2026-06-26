@@ -13,13 +13,11 @@ interface MedicoFormProps {
 
 export default function MedicoForm({ authData, onBack }: MedicoFormProps) {
     const router = useRouter();
-    const { registerAsync, isRegistering } = useAuth();
-    const { criarMedicoAsync, isCriandoMedico } = useMedico();
+    const { registerAsync } = useAuth();
+    const { criarMedicoAsync} = useMedico();
     
     const [crm, setCrm] = useState("");
     const [especialidade, setEspecialidade] = useState("");
-
-    const isProcessing = isRegistering || isCriandoMedico;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,7 +29,7 @@ export default function MedicoForm({ authData, onBack }: MedicoFormProps) {
                 nome: authData.nome,
                 crm,
                 especialidade,
-                authId: authResponse.userId
+                authId: authResponse.authId
             });
 
             router.push('/');
@@ -78,17 +76,15 @@ export default function MedicoForm({ authData, onBack }: MedicoFormProps) {
                     <button 
                         type="button"
                         onClick={onBack}
-                        disabled={isProcessing}
                         className="w-[30%] py-3 px-4 bg-transparent border border-zinc-700 text-zinc-300 hover:bg-zinc-800 font-semibold rounded-lg transition-all duration-200 disabled:opacity-50"
                     >
                         Voltar
                     </button>
                     <button 
-                        type="submit"
-                        disabled={isProcessing}
+                        type="submit" 
                         className="w-[70%] py-3 px-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black font-semibold rounded-lg transition-all duration-200 disabled:opacity-50 flex items-center justify-center"
                     >
-                        {isProcessing ? "Validando..." : "Validar CRM e Salvar"}
+                        Concluir Cadastro
                     </button>
                 </div>
             </form>

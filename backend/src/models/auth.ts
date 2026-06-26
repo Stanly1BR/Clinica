@@ -1,6 +1,6 @@
-import sequelize from '../db.js';
-import { DataTypes, Model } from 'sequelize';
-import type { AuthDTO } from '../schemas/auth.schema.js';
+import sequelize from "../db.js";
+import { DataTypes, Model } from "sequelize";
+import type { AuthDTO } from "../schemas/auth.schema.js";
 
 class Auth extends Model<AuthDTO> implements AuthDTO {
     public declare id: string;
@@ -20,35 +20,54 @@ Auth.init(
             primaryKey: true,
         },
         nome: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
+            validate: {
+                len: [2, 100],
+                notEmpty: true,
+            }
         },
         email: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(255),
             allowNull: false,
             unique: true,
+            validate: {
+                isEmail: true,
+                notEmpty: true,
+            }
         },
         password: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(255),
             allowNull: false,
+            validate: {
+                len: [6, 255],
+                notEmpty: true,
+            }
         },
         tipo: {
             type: DataTypes.ENUM('medico', 'paciente'),
             allowNull: false,
+            validate: {
+                isIn: [['medico', 'paciente']],
+                notEmpty: true,
+            }
         },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: false,
+            defaultValue: DataTypes.NOW,
         },
         updatedAt: {
             type: DataTypes.DATE,
             allowNull: false,
+            defaultValue: DataTypes.NOW,
         },
     },
     {
         sequelize,
         modelName: 'Auth',
         tableName: 'auths',
+        timestamps: true,
     }
 );
 

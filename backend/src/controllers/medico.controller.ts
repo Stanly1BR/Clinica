@@ -1,6 +1,7 @@
 import { Router, type Request, type Response } from 'express';
-import type { MedicoDTO } from '../schemas/medico.schema.js';
+import { medicoSchema, type MedicoDTO } from '../schemas/medico.schema.js';
 import { MedicoService } from '../services/medico.service.js';
+import { validate } from '../middlewares/validate.js';
 
 export class MedicoController {
     public router: Router;
@@ -15,8 +16,8 @@ export class MedicoController {
     private initializeRoutes() {
         this.router.get('/', this.getAllMedicos.bind(this));
         this.router.get('/:id', this.getMedicoById.bind(this));
-        this.router.post('/', this.createMedico.bind(this));
-        this.router.put('/:id', this.updateMedico.bind(this));
+        this.router.post('/', validate(medicoSchema), this.createMedico.bind(this));
+        this.router.put('/:id', validate(medicoSchema.partial()), this.updateMedico.bind(this));
         this.router.delete('/:id', this.deleteMedico.bind(this));
     }
 
@@ -24,8 +25,8 @@ export class MedicoController {
         try {
             const { id } = req.params;
             
-            if (id !== typeof String) {
-                res.status(400).json({ error: 'Invalid ID format' });
+            if (!id) {
+                res.status(400).json({ error: 'ID is required' });
                 return;
             }
 
@@ -64,8 +65,8 @@ export class MedicoController {
         try {
             const { id } = req.params;
             
-            if (id !== typeof String) {
-                res.status(400).json({ error: 'Invalid ID format' });
+            if (!id) {
+                res.status(400).json({ error: 'ID is required' });
                 return;
             }
 
@@ -87,8 +88,8 @@ export class MedicoController {
         try {
             const { id } = req.params;
             
-            if (id !== typeof String) {
-                res.status(400).json({ error: 'Invalid ID format' });
+            if (!id) {
+                res.status(400).json({ error: 'ID is required' });
                 return;
             }
 

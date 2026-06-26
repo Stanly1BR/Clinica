@@ -4,7 +4,7 @@ export const pacienteSchema = z.object({
     id: z.uuid().optional(),
     nome: z.string().max(100),
     cpf: z.string().length(11),
-    dataNascimento: z.date(),
+    dataNascimento: z.coerce.date(),
     telefone: z.string().length(11),
     authId: z.uuid(),
     createdAt: z.date().optional(),

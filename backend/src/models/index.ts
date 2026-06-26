@@ -7,35 +7,108 @@ import Paciente from './paciente.js';
 import Consulta from './consulta.js';
 import Diagnostico from './diagnostico.js';
 
-// 2. Definindo as Associações (Relacionamentos)
+/**
+ * =====================================================
+ * DEFININDO AS ASSOCIAÇÕES (Relacionamentos)
+ * =====================================================
+ */
 
-// --- Auth <-> Médico / Paciente ---
-Auth.hasOne(Medico, { foreignKey: 'authId', as: 'medico' });
-Medico.belongsTo(Auth, { foreignKey: 'authId', as: 'auth' });
+/**
+ * Auth <-> Médico / Paciente
+ * Um usuário Auth pode ser um Médico ou um Paciente
+ */
+Auth.hasOne(Medico, {
+    foreignKey: 'authId',
+    as: 'medico',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
 
-Auth.hasOne(Paciente, { foreignKey: 'authId', as: 'paciente' });
-Paciente.belongsTo(Auth, { foreignKey: 'authId', as: 'auth' });
+Medico.belongsTo(Auth, {
+    foreignKey: 'authId',
+    as: 'auth',
+});
 
-// --- Médico / Paciente <-> Consulta ---
-Medico.hasMany(Consulta, { foreignKey: 'medicoId', as: 'consultas' });
-Consulta.belongsTo(Medico, { foreignKey: 'medicoId', as: 'medico' });
+Auth.hasOne(Paciente, {
+    foreignKey: 'authId',
+    as: 'paciente',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
 
-Paciente.hasMany(Consulta, { foreignKey: 'pacienteId', as: 'consultas' });
-Consulta.belongsTo(Paciente, { foreignKey: 'pacienteId', as: 'paciente' });
+Paciente.belongsTo(Auth, {
+    foreignKey: 'authId',
+    as: 'auth',
+});
 
-// --- Consulta / Paciente <-> Diagnóstico ---
-Consulta.hasMany(Diagnostico, { foreignKey: 'consultaId', as: 'diagnosticos' });
-Diagnostico.belongsTo(Consulta, { foreignKey: 'consultaId', as: 'consulta' });
+/**
+ * Médico / Paciente <-> Consulta
+ * Um Médico tem muitas Consultas
+ * Um Paciente tem muitas Consultas
+ */
+Medico.hasMany(Consulta, {
+    foreignKey: 'medicoId',
+    as: 'consultasAtendidas',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
 
-Paciente.hasMany(Diagnostico, { foreignKey: 'pacienteId', as: 'diagnosticos' });
-Diagnostico.belongsTo(Paciente, { foreignKey: 'pacienteId', as: 'paciente' });
+Consulta.belongsTo(Medico, {
+    foreignKey: 'medicoId',
+    as: 'medico',
+});
 
-// 3. Exportando o sequelize e os models centralizados
+Paciente.hasMany(Consulta, {
+    foreignKey: 'pacienteId',
+    as: 'consultas',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+
+Consulta.belongsTo(Paciente, {
+    foreignKey: 'pacienteId',
+    as: 'paciente',
+});
+
+/**
+ * Consulta / Paciente <-> Diagnóstico
+ * Uma Consulta tem muitos Diagnósticos
+ * Um Paciente tem muitos Diagnósticos
+ */
+Consulta.hasMany(Diagnostico, {
+    foreignKey: 'consultaId',
+    as: 'diagnosticos',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+
+Diagnostico.belongsTo(Consulta, {
+    foreignKey: 'consultaId',
+    as: 'consulta',
+});
+
+Paciente.hasMany(Diagnostico, {
+    foreignKey: 'pacienteId',
+    as: 'diagnosticos',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+
+Diagnostico.belongsTo(Paciente, {
+    foreignKey: 'pacienteId',
+    as: 'paciente',
+});
+
+/**
+ * =====================================================
+ * EXPORTANDO sequelize e os models
+ * =====================================================
+ */
 export {
-  sequelize,
-  Auth,
-  Medico,
-  Paciente,
-  Consulta,
-  Diagnostico
+    sequelize,
+    Auth,
+    Medico,
+    Paciente,
+    Consulta,
+    Diagnostico
 };

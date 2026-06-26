@@ -13,14 +13,12 @@ interface PacienteFormProps {
 
 export default function PacienteForm({ authData, onBack }: PacienteFormProps) {
     const router = useRouter();
-    const { registerAsync, isRegistering } = useAuth();
-    const { criarPacienteAsync, isCriandoPaciente } = usePaciente();
+    const { registerAsync } = useAuth();
+    const { criarPacienteAsync } = usePaciente();
 
     const [cpf, setCpf] = useState("");
     const [dataNascimento, setDataNascimento] = useState("");
     const [telefone, setTelefone] = useState("");
-
-    const isProcessing = isRegistering || isCriandoPaciente;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,7 +31,7 @@ export default function PacienteForm({ authData, onBack }: PacienteFormProps) {
                 cpf,
                 dataNascimento: new Date(dataNascimento),
                 telefone,
-                authId: authResponse.userId
+                authId: authResponse.authId
             });
 
             router.push('/');
@@ -91,17 +89,15 @@ export default function PacienteForm({ authData, onBack }: PacienteFormProps) {
                     <button 
                         type="button"
                         onClick={onBack}
-                        disabled={isProcessing}
                         className="w-[30%] py-3 px-4 bg-transparent border border-zinc-700 text-zinc-300 hover:bg-zinc-800 font-semibold rounded-lg transition-all duration-200 disabled:opacity-50"
                     >
                         Voltar
                     </button>
                     <button 
                         type="submit" 
-                        disabled={isProcessing}
                         className="w-[70%] py-3 px-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black font-semibold rounded-lg transition-all duration-200 disabled:opacity-50 flex items-center justify-center"
                     >
-                        {isProcessing ? "Salvando..." : "Concluir Cadastro"}
+                        Cadastrar
                     </button>
                 </div>
             </form>

@@ -1,10 +1,11 @@
 import type { MedicoDTO } from '../schemas/medico.schema';
+import { fetchWithAuth } from '../utils/fetchWithAuth';
 
 const API_URL = 'http://localhost:3001/api/medicos';
 
 export class MedicoService {
     static async getById(id: string): Promise<MedicoDTO> {
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetchWithAuth(`${API_URL}/${id}`);
 
         if (!response.ok) {
             throw new Error('Failed to fetch medico');
@@ -14,7 +15,7 @@ export class MedicoService {
     }
 
     static async getAll(): Promise<MedicoDTO[]> {
-        const response = await fetch(API_URL);
+        const response = await fetchWithAuth(API_URL);
 
         if (!response.ok) {
             throw new Error('Failed to fetch medicos');
@@ -24,7 +25,7 @@ export class MedicoService {
     }
 
     static async create(data: Omit<MedicoDTO, 'id' | 'createdAt' | 'updatedAt'>): Promise<MedicoDTO> {
-        const response = await fetch(API_URL, {
+        const response = await fetchWithAuth(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +41,7 @@ export class MedicoService {
     }
 
     static async update(id: string, data: Partial<Omit<MedicoDTO, 'id' | 'createdAt' | 'updatedAt'>>): Promise<MedicoDTO> {
-        const response = await fetch(`${API_URL}/${id}`, {
+        const response = await fetchWithAuth(`${API_URL}/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,7 +57,7 @@ export class MedicoService {
     }
 
     static async delete(id: string): Promise<void> {
-        const response = await fetch(`${API_URL}/${id}`, {
+        const response = await fetchWithAuth(`${API_URL}/${id}`, {
             method: 'DELETE',
         });
 

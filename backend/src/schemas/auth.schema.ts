@@ -16,7 +16,9 @@ export type RegisterDTO = Omit<AuthDTO, 'id' | 'createdAt' | 'updatedAt'>;
 
 export const AuthResponseSchema = z.object({
     token: z.string(),
-    userId: z.uuid(),
+    userId: z.string().nullable(),
+    authId: z.string(),
+    tipo: z.enum(['medico', 'paciente']),
 });
 
 export type AuthResponseDTO = z.infer<typeof AuthResponseSchema>;
