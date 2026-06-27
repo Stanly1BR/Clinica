@@ -259,11 +259,16 @@ function ConsultaCard({
     onReschedule: (id: string, data: string, horario: string) => void;
 }) {
     const dataFormatada = new Date(consulta.data).toLocaleDateString("pt-BR");
-    const statusColor = {
+    
+    // CORREÇÃO: Definindo o mapeamento de cores como Record<string, string>
+    const statusColorsMap: Record<string, string> = {
         agendada: "bg-blue-500/20 text-blue-400 border-blue-500/30",
         cancelada: "bg-red-500/20 text-red-400 border-red-500/30",
         concluida: "bg-green-500/20 text-green-400 border-green-500/30"
-    }[consulta.status];
+    };
+
+    // Acessando a cor de forma segura e garantindo um fallback
+    const statusColor = statusColorsMap[consulta.status] || "bg-zinc-500/20 text-zinc-400 border-zinc-500/30";
 
     return (
         <div className="bg-zinc-900/40 border border-zinc-800 rounded-lg p-6 hover:border-zinc-700 transition-all">
@@ -282,7 +287,7 @@ function ConsultaCard({
                     </div>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium border ${statusColor}`}>
-                    {consulta.status.charAt(0).toUpperCase() + consulta.status.slice(1)}
+                    {consulta.status ? consulta.status.charAt(0).toUpperCase() + consulta.status.slice(1) : "Desconhecido"}
                 </span>
             </div>
 

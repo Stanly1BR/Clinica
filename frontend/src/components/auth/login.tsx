@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/auth.hook";
 import { useState } from "react";
 
 export default function Login() {
-    const { login, isLoggingIn } = useAuth();
+    const { login} = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -50,10 +50,9 @@ export default function Login() {
                 
                 <button 
                     type="submit" 
-                    disabled={isLoggingIn}
                     className="w-full py-3 px-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black font-semibold rounded-lg transition-all duration-200 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {isLoggingIn ? "Entrando..." : "Entrar no Sistema"}
+                    Entrar
                 </button>
             </form>
         </div>

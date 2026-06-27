@@ -7,7 +7,7 @@ import MedicoDashboard from "./MedicoDashboard";
 export default function ViewDashboard() {
     const { user } = useAuth();
 
-    if (!user) {
+    if (!user || !user.userId) {
         return (
             <div className="flex justify-center items-center h-64 animate-in fade-in">
                 <div className="w-8 h-8 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin"></div>

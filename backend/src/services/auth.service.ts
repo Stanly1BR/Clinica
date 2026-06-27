@@ -1,7 +1,7 @@
 import bicrypt from 'bcrypt';
 import auth from '../models/auth.js';
-import paciente from '../models/paciente.js'; // Importe o model de paciente
-import medico from '../models/medico.js';     // Importe o model de medico
+import paciente from '../models/paciente.js';
+import medico from '../models/medico.js'; 
 import type { LoginDTO, AuthResponseDTO, RegisterDTO } from '../schemas/auth.schema.js';
 import jwt from 'jsonwebtoken';
 
@@ -20,7 +20,7 @@ export class AuthService {
             throw new Error('Invalid password');
         }
 
-        // 1. Busca o ID do perfil específico com base no tipo
+
         let userId = null;
         if (user.tipo === 'paciente') {
             const perfilPaciente = await paciente.findOne({ where: { authId: user.id } });
@@ -31,12 +31,12 @@ export class AuthService {
         }
 
         const token = jwt.sign(
-            {userId, tipo: user.tipo }, // Opcional: injetar no token também
+            {userId, tipo: user.tipo }, 
             JWT_SECRET, 
             { expiresIn: '1d' }
         );
         
-        // 2. Retorna o perfilId junto com os dados de Auth
+
         return { token, userId, authId: user.id, tipo: user.tipo };
     }
 
@@ -45,7 +45,7 @@ export class AuthService {
         const hashedPassword = await bicrypt.hash(password, 10);
 
         const newAuth = await auth.create({ ...authData, password: hashedPassword });
-        // 1. Busca o ID do perfil específico com base no tipo
+
         let userId = null;
         if (newAuth.tipo === 'paciente') {
             const perfilPaciente = await paciente.findOne({ where: { authId: newAuth.id } });
@@ -56,12 +56,11 @@ export class AuthService {
         }
 
         const token = jwt.sign(
-            {userId, tipo: newAuth.tipo }, // Opcional: injetar no token também
+            {userId, tipo: newAuth.tipo }, 
             JWT_SECRET, 
             { expiresIn: '1d' }
         );
 
-        // 2. Retorna o perfilId junto com os dados de Auth
         return { token, userId, authId: newAuth.id, tipo: newAuth.tipo };
     }
 }

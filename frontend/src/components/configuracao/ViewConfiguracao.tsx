@@ -8,7 +8,7 @@ import PacienteConfig from "./PacienteConfig";
 export default function ViewConfiguracao() {
     const { user } = useAuth();
     
-    if (!user) {
+    if (!user || !user.userId) {
         return (
             <div className="flex justify-center items-center h-64 animate-in fade-in">
                 <div className="w-8 h-8 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin"></div>
@@ -25,6 +25,8 @@ export default function ViewConfiguracao() {
                 <h2 className="text-3xl font-bold text-white tracking-tight">Configurações de Perfil</h2>
                 <p className="text-zinc-400 mt-2 text-sm">Visualize e atualize suas informações no sistema</p>
             </div>
+
+            
 
             {tipoConta === 'medico' && <MedicoConfig userId={userId} />}
             {tipoConta === 'paciente' && <PacienteConfig userId={userId} />}
