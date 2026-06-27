@@ -23,7 +23,7 @@ export class DiagnosticoController {
 
     private async getDiagnosticoById(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params;
+            const { id } = req.params as { id: string };
 
             if (!id) {
                 res.status(400).json({ error: 'ID is required' });
@@ -66,7 +66,7 @@ export class DiagnosticoController {
 
     private async updateDiagnostico(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params;
+            const { id } = req.params as { id: string };
             const diagnosticoData: Partial<DiagnosticoDTO> = req.body;
 
             if (!id) {
@@ -89,7 +89,7 @@ export class DiagnosticoController {
 
     private async deleteDiagnostico(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params;
+            const { id } = req.params as { id: string };
 
             if (!id) {
                 res.status(400).json({ error: 'ID is required' });

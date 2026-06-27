@@ -1,6 +1,6 @@
 import sequelize from "../db.js";
 import { DataTypes, Model } from "sequelize";
-import type { DiagnosticoDTO } from "../schemas/diagnostico.schema.js";
+import type { DiagnosticoDTO } from "../schemas/diagnosticos.schema.js";
 
 export class Diagnostico extends Model<DiagnosticoDTO> implements DiagnosticoDTO {
     public declare id: string;

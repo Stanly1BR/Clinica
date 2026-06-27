@@ -23,7 +23,7 @@ export class MedicoController {
 
     private async getMedicoById(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params;
+            const { id } = req.params as { id: string };
             
             if (!id) {
                 res.status(400).json({ error: 'ID is required' });
@@ -63,7 +63,7 @@ export class MedicoController {
 
     private async updateMedico(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params;
+            const { id } = req.params as { id: string };
             
             if (!id) {
                 res.status(400).json({ error: 'ID is required' });
@@ -86,7 +86,7 @@ export class MedicoController {
 
     private async deleteMedico(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params;
+            const { id } = req.params as { id: string };
             
             if (!id) {
                 res.status(400).json({ error: 'ID is required' });

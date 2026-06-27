@@ -7,6 +7,8 @@ export const diagnosticosSchema = z.object({
     pacienteId: z.uuid(),
     consultaId: z.uuid(),
     dataDiagnostico: z.coerce.date(),
+    createdAt: z.date().optional(),
+    updatedAt: z.date().optional(),
 });
 
 export type DiagnosticoDTO = z.infer<typeof diagnosticosSchema>;
